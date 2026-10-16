@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Learn"
+  short_description: "系统学习开源教程：克隆资料、规划节奏、深挖问题并沉淀笔记"
+  default_prompt: "Use $project-learn to clone, plan, and systematically learn this open-source tutorial."
