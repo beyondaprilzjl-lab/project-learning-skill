@@ -140,6 +140,46 @@ $project-learn 学习这个教程：https://github.com/OWNER/REPO
 把刚才理解的内容记录成笔记
 ```
 
+### Claude Code
+
+Claude Code 支持标准的 Agent Skills 目录结构。将仓库克隆到个人 Skill 目录后，即可在本机所有 Claude Code 项目中使用。目录规则与加载方式可参考 [Claude Code Skills 官方文档](https://code.claude.com/docs/en/skills)。
+
+macOS、Linux 或 WSL：
+
+```bash
+git clone https://github.com/beyondaprilzjl-lab/project-learning-skill.git \
+  ~/.claude/skills/project-learn
+```
+
+Windows PowerShell：
+
+```powershell
+git clone https://github.com/beyondaprilzjl-lab/project-learning-skill.git `
+  "$env:USERPROFILE\.claude\skills\project-learn"
+```
+
+安装完成后新建 Claude Code 会话；如果当前会话尚未发现该 Skill，可以执行：
+
+```text
+/reload-skills
+```
+
+直接调用：
+
+```text
+/project-learn 学习这个教程：https://github.com/OWNER/REPO
+```
+
+也可以直接使用自然语言，Claude Code 会根据 `SKILL.md` 中的 `description` 判断是否需要启用本 Skill：
+
+```text
+帮我系统学习这个开源教程：https://github.com/OWNER/REPO
+继续上次的教程学习
+解释一下当前章节的这个细节
+```
+
+`agents/openai.yaml` 是 Codex 使用的展示元数据，Claude Code 不依赖该文件，不会影响 Skill 的发现和调用。`references/` 中的辅助模板会通过 `SKILL.md` 的相对路径按需读取。
+
 ### Kimi Code
 
 ```bash
@@ -207,7 +247,7 @@ project-learning-skill/
 
 - `SKILL.md`：核心行为、流程、路由和验收规则。
 - `references/artifact-templates.md`：项目总览、学习计划、单元记录和概念笔记模板。
-- `agents/openai.yaml`：Codex 使用的展示名称和默认提示。
+- `agents/openai.yaml`：Codex 使用的展示名称和默认提示；Claude Code 不依赖该文件。
 
 ## 设计原则
 
